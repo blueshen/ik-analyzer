@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/blueshen/ik-analyzer.png?branch=master)](https://travis-ci.org/blueshen/ik-analyzer)
+
 IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为<http://code.google.com/p/ik-analyzer/>
 
 本版本，主要特点：
@@ -9,6 +11,7 @@ IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为<
 Maven用法：
 
 将以下依赖加入工程的pom.xml中的<dependencies>...</dependencies>部分。
+
     <dependency>
         <groupId>org.wltea.ik-analyzer</groupId>
         <artifactId>ik-analyzer</artifactId>
