@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/blueshen/ik-analyzer.png?branch=master)](https://travis-ci.org/blueshen/ik-analyzer)
+[![Build Status](https://travis-ci.org/blueshen/ik-analyzer.svg)](https://travis-ci.org/blueshen/ik-analyzer)
 
 IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为<http://code.google.com/p/ik-analyzer/>
 
