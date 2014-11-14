@@ -1,4 +1,10 @@
-IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为http://code.google.com/p/ik-analyzer/。
+IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为<http://code.google.com/p/ik-analyzer/>
+
+本版本，主要特点：
+
+- Maven化
+- 添加了不少停用词，使其适用于中文分类
+- 修改支持的lucene版本为4.6.1
 
 Maven用法：
 
@@ -12,5 +18,11 @@ Maven用法：
 在IK Analyzer加入Maven Central Repository之前，你需要手动安装，安装到本地的repository，或者上传到自己的Maven repository服务器上。
 
 要安装到本地Maven repository，使用如下命令，将自动编译，打包并安装：
-mvn install -Dmaven.test.skip=true
+
+    mvn install -Dmaven.test.skip=true
+
+想要切换lucene版本：
+
+    mvn -Dlucene.version=4.*.* install -Dmaven.test.skip=true
+
 
