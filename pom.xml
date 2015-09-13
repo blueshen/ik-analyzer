@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wltea.ik-analyzer</groupId>
     <artifactId>ik-analyzer</artifactId>
-    <version>2012-FF</version>
-    <name>IK Analyzer 2012-FF</name>
+    <version>4.10.3</version>
+    <name>IK Analyzer</name>
     <description>A dictionary and grammar-based Chinese segmenter.</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <lucene.version>4.6.1</lucene.version>
+        <lucene.version>4.10.3</lucene.version>
     </properties>
 
     <dependencies>
