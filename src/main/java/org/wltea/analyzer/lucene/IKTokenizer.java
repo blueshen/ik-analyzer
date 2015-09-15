@@ -104,7 +104,8 @@ public final class IKTokenizer extends Tokenizer {
     }
 
     @Override
-    public final void end() {
+    public final void end() throws IOException {
+        super.end();
         // set final offset
         int finalOffset = correctOffset(this.endPosition);
         offsetAtt.setOffset(finalOffset, finalOffset);
