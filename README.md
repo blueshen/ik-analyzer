@@ -6,7 +6,7 @@ IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为<
 
 - Maven化
 - 添加了不少停用词，使其适用于中文分类
-- 修改支持的lucene版本为4.6.1
+- 修改支持的lucene版本为5.3.0
 
 Maven用法：
 
@@ -26,6 +26,6 @@ Maven用法：
 
 想要切换lucene版本：
 
-    mvn -Dlucene.version=4.*.* install -Dmaven.test.skip=true
+    mvn -Dlucene.version=5.*.* install -Dmaven.test.skip=true
 
 
