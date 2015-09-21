@@ -1,7 +1,7 @@
 /**
  * IK 中文分词  版本 5.0.1
  * IK Analyzer release 5.0.1
- * 
+ *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -20,11 +20,9 @@
  * 源代码由林良益(linliangyi2005@gmail.com)提供
  * 版权声明 2012，乌龙茶工作室
  * provided by Linliangyi and copyright 2012 by Oolong studio
- * 
+ *
  */
 package org.wltea.analyzer.lucene;
-
-import java.io.Reader;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.Tokenizer;
@@ -34,43 +32,43 @@ import org.apache.lucene.analysis.Tokenizer;
  * 兼容Lucene 4.0版本
  */
 public final class IKAnalyzer extends Analyzer{
-	
-	private boolean useSmart;
-	
-	public boolean useSmart() {
-		return useSmart;
-	}
 
-	public void setUseSmart(boolean useSmart) {
-		this.useSmart = useSmart;
-	}
+    private boolean useSmart;
 
-	/**
-	 * IK分词器Lucene  Analyzer接口实现类
-	 * 
-	 * 默认细粒度切分算法
-	 */
-	public IKAnalyzer(){
-		this(false);
-	}
-	
-	/**
-	 * IK分词器Lucene Analyzer接口实现类
-	 * 
-	 * @param useSmart 当为true时，分词器进行智能切分
-	 */
-	public IKAnalyzer(boolean useSmart){
-		super();
-		this.useSmart = useSmart;
-	}
+    public boolean useSmart() {
+        return useSmart;
+    }
 
-	/**
-	 * 重载Analyzer接口，构造分词组件
-	 */
-	@Override
-	protected TokenStreamComponents createComponents(String fieldName, final Reader in) {
-		Tokenizer _IKTokenizer = new IKTokenizer(in , this.useSmart());
-		return new TokenStreamComponents(_IKTokenizer);
-	}
+    public void setUseSmart(boolean useSmart) {
+        this.useSmart = useSmart;
+    }
+
+    /**
+     * IK分词器Lucene  Analyzer接口实现类
+     *
+     * 默认细粒度切分算法
+     */
+    public IKAnalyzer(){
+        this(false);
+    }
+
+    /**
+     * IK分词器Lucene Analyzer接口实现类
+     *
+     * @param useSmart 当为true时，分词器进行智能切分
+     */
+    public IKAnalyzer(boolean useSmart){
+        super();
+        this.useSmart = useSmart;
+    }
+
+    /**
+     * 重载Analyzer接口，构造分词组件
+     */
+    @Override
+    protected TokenStreamComponents createComponents(String fieldName) {
+        Tokenizer _IKTokenizer = new IKTokenizer(this.useSmart());
+        return new TokenStreamComponents(_IKTokenizer);
+    }
 
 }
