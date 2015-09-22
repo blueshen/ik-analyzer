@@ -1,5 +1,5 @@
 language: java
 jdk:
   - oraclejdk7
-
+install: mvn clean -Dmaven.test.skip=true
 script: mvn clean package -Dmaven.test.skip=true
