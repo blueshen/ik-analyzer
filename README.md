@@ -6,7 +6,7 @@ IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为<
 
 - Maven化
 - 添加了不少停用词，使其适用于中文分类
-- 修改支持的lucene版本为5.3.0
+- 修改支持的lucene版本为5,6
 
 Maven用法：
 
