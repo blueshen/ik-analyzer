@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/blueshen/ik-analyzer.svg)](https://travis-ci.org/blueshen/ik-analyzer)
 
-长期维护，欢迎pull request
+Long Term Support，welcome pull request
 
 IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为<http://code.google.com/p/ik-analyzer/>
 
