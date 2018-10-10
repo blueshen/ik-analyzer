@@ -6,7 +6,7 @@ IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为<
 
 - Maven化
 - 添加了不少停用词，使其适用于中文分类
-- 修改支持的lucene版本为5.3.0
+- 全面支持的lucene全系列版本为5/6/7
 
 Maven用法：
 
@@ -15,7 +15,7 @@ Maven用法：
     <dependency>
         <groupId>org.wltea.ik-analyzer</groupId>
         <artifactId>ik-analyzer</artifactId>
-        <version>2012-FF</version>
+        <version>X.X.X</version>
 	</dependency>
 
 在IK Analyzer加入Maven Central Repository之前，你需要手动安装，安装到本地的repository，或者上传到自己的Maven repository服务器上。
@@ -24,8 +24,6 @@ Maven用法：
 
     mvn install -Dmaven.test.skip=true
 
-想要切换lucene版本：
 
-    mvn -Dlucene.version=5.*.* install -Dmaven.test.skip=true
 
 
