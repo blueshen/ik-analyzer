@@ -14,7 +14,7 @@ Maven用法：
 
 将以下依赖加入工程的pom.xml中的依赖部分。
 
-```java
+```xml
     <dependency>
         <groupId>org.wltea.ik-analyzer</groupId>
         <artifactId>ik-analyzer</artifactId>
