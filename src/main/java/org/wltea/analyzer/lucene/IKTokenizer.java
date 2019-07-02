@@ -1,28 +1,25 @@
 /**
  * IK 中文分词  版本 5.0.1
  * IK Analyzer release 5.0.1
- *
+ * <p>
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * <p>
  * 源代码由林良益(linliangyi2005@gmail.com)提供
  * 版权声明 2012，乌龙茶工作室
  * provided by Linliangyi and copyright 2012 by Oolong studio
- *
-
- *
  */
 package org.wltea.analyzer.lucene;
 
@@ -32,7 +29,6 @@ import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
-
 import org.wltea.analyzer.core.IKSegmenter;
 import org.wltea.analyzer.core.Lexeme;
 
@@ -42,27 +38,27 @@ import org.wltea.analyzer.core.Lexeme;
  */
 public final class IKTokenizer extends Tokenizer {
 
-    //IK分词器实现
-    private IKSegmenter _IKImplement;
-
     //词元文本属性
     private final CharTermAttribute termAtt;
     //词元位移属性
     private final OffsetAttribute offsetAtt;
     //词元分类属性（该属性分类参考org.wltea.analyzer.core.Lexeme中的分类常量）
     private final TypeAttribute typeAtt;
+    //IK分词器实现
+    private IKSegmenter _IKImplement;
     //记录最后一个词元的结束位置
     private int endPosition;
 
     /**
      * Lucene 4.0 Tokenizer适配器类构造函数
+     *
      * @param useSmart
      */
     public IKTokenizer(boolean useSmart) {
         offsetAtt = addAttribute(OffsetAttribute.class);
         termAtt = addAttribute(CharTermAttribute.class);
         typeAtt = addAttribute(TypeAttribute.class);
-        _IKImplement = new IKSegmenter(input , useSmart);
+        _IKImplement = new IKSegmenter(input, useSmart);
     }
 
     /* (non-Javadoc)
@@ -73,7 +69,7 @@ public final class IKTokenizer extends Tokenizer {
         //清除所有的词元属性
         clearAttributes();
         Lexeme nextLexeme = _IKImplement.next();
-        if(nextLexeme != null){
+        if (nextLexeme != null) {
             //将Lexeme转成Attributes
             //设置词元文本
             termAtt.append(nextLexeme.getLexemeText());
