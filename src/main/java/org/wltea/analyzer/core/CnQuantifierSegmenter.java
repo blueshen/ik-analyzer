@@ -34,21 +34,22 @@ import org.wltea.analyzer.dic.Hit;
 /**
  * 中文数量词子分词器
  */
-class CN_QuantifierSegmenter implements ISegmenter {
+class CnQuantifierSegmenter implements ISegmenter {
 
     /**
      * 子分词器标签
      */
-    static final String SEGMENTER_NAME = "QUAN_SEGMENTER";
+    private static final String SEGMENTER_NAME = "QUAN_SEGMENTER";
 
     /**
      * 中文数词
+     * Cnum
      */
-    private static String Chn_Num = "一二两三四五六七八九十零壹贰叁肆伍陆柒捌玖拾百千万亿拾佰仟萬億兆卅廿";//Cnum
+    private static final String CHN_NUM = "一二两三四五六七八九十零壹贰叁肆伍陆柒捌玖拾百千万亿拾佰仟萬億兆卅廿";
     private static Set<Character> ChnNumberChars = new HashSet<Character>();
 
     static {
-        char[] ca = Chn_Num.toCharArray();
+        char[] ca = CHN_NUM.toCharArray();
         for (char nChar : ca) {
             ChnNumberChars.add(nChar);
         }
@@ -71,7 +72,7 @@ class CN_QuantifierSegmenter implements ISegmenter {
      */
     private List<Hit> countHits;
 
-    CN_QuantifierSegmenter() {
+    CnQuantifierSegmenter() {
         nStart = -1;
         nEnd = -1;
         this.countHits = new LinkedList<Hit>();
@@ -187,7 +188,6 @@ class CN_QuantifierSegmenter implements ISegmenter {
                 //输出当前的词
                 Lexeme newLexeme = new Lexeme(context.getBufferOffset(), context.getCursor(), 1, Lexeme.TYPE_COUNT);
                 context.addLexeme(newLexeme);
-
                 //同时也是词前缀
                 if (singleCharHit.isPrefix()) {
                     //前缀匹配则放入hit列表

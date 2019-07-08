@@ -31,13 +31,9 @@ package org.wltea.analyzer.core;
 class CharacterUtil {
 
     public static final int CHAR_USELESS = 0;
-
     public static final int CHAR_ARABIC = 0X00000001;
-
     public static final int CHAR_ENGLISH = 0X00000002;
-
     public static final int CHAR_CHINESE = 0X00000004;
-
     public static final int CHAR_OTHER_CJK = 0X00000008;
 
     /**
@@ -50,8 +46,7 @@ class CharacterUtil {
     static int identifyCharType(char input) {
         if (input >= '0' && input <= '9') {
             return CHAR_ARABIC;
-        } else if ((input >= 'a' && input <= 'z')
-                || (input >= 'A' && input <= 'Z')) {
+        } else if ((input >= 'a' && input <= 'z') || (input >= 'A' && input <= 'Z')) {
             return CHAR_ENGLISH;
         } else {
             Character.UnicodeBlock ub = Character.UnicodeBlock.of(input);
@@ -89,14 +84,11 @@ class CharacterUtil {
     static char regularize(char input) {
         if (input == 12288) {
             input = (char) 32;
-
         } else if (input > 65280 && input < 65375) {
             input = (char) (input - 65248);
-
         } else if (input >= 'A' && input <= 'Z') {
             input += 32;
         }
-
         return input;
     }
 }

@@ -63,8 +63,8 @@ public class SWMCQueryBuilder {
         //1.对keywords进行分词处理
         List<Lexeme> lexemes = doAnalyze(keywords);
         //2.根据分词结果，生成SWMCQuery
-        Query _SWMCQuery = getSWMCQuery(fieldName, lexemes, quickMode);
-        return _SWMCQuery;
+        Query swmcQuery = getSWMCQuery(fieldName, lexemes, quickMode);
+        return swmcQuery;
     }
 
     /**
@@ -78,12 +78,12 @@ public class SWMCQueryBuilder {
         List<Lexeme> lexemes = new ArrayList<Lexeme>();
         IKSegmenter ikSeg = new IKSegmenter(new StringReader(keywords), true);
         try {
-            Lexeme l = null;
+            Lexeme l;
             while ((l = ikSeg.next()) != null) {
                 lexemes.add(l);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("io error.", e);
         }
         return lexemes;
     }

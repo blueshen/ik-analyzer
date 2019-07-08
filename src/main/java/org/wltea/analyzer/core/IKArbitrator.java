@@ -69,14 +69,14 @@ class IKArbitrator {
 
         //处理最后的path
         if (crossPath.size() == 1 || !useSmart) {
-            //crossPath没有歧义 或者 不做歧义处理
-            //直接输出当前crossPath
+            // crossPath没有歧义 或者 不做歧义处理
+            // 直接输出当前crossPath
             context.addLexemePath(crossPath);
         } else {
-            //对当前的crossPath进行歧义处理
+            // 对当前的crossPath进行歧义处理
             QuickSortSet.Cell headCell = crossPath.getHead();
             LexemePath judgeResult = this.judge(headCell, crossPath.getPathLength());
-            //输出歧义处理结果judgeResult
+            // 输出歧义处理结果judgeResult
             context.addLexemePath(judgeResult);
         }
     }

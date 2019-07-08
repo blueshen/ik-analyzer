@@ -30,19 +30,24 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Configuration 默认实现
  * 2012-5-8
  */
 public class DefaultConfig implements Configuration {
 
-    /*
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultConfig.class);
+
+    /**
      * 分词器默认字典路径
      */
     private static final String PATH_DIC_MAIN = "org/wltea/analyzer/dic/main2012.dic";
     private static final String PATH_DIC_QUANTIFIER = "org/wltea/analyzer/dic/quantifier.dic";
 
-    /*
+    /**
      * 分词器配置文件路径
      */
     private static final String FILE_NAME = "IKAnalyzer.cfg.xml";
@@ -52,25 +57,24 @@ public class DefaultConfig implements Configuration {
     private static final String EXT_STOP = "ext_stopwords";
 
     private Properties props;
-    /*
+    /**
      * 是否使用smart方式分词
      */
     private boolean useSmart;
 
-    /*
+    /**
      * 初始化配置文件
      */
     private DefaultConfig() {
         props = new Properties();
-
         InputStream input = this.getClass().getClassLoader().getResourceAsStream(FILE_NAME);
         if (input != null) {
             try {
                 props.loadFromXML(input);
             } catch (InvalidPropertiesFormatException e) {
-                e.printStackTrace();
+                LOG.error("", e);
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error("", e);
             }
         }
     }

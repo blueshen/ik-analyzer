@@ -37,7 +37,7 @@ class CJKSegmenter implements ISegmenter {
     /**
      * 子分词器标签
      */
-    static final String SEGMENTER_NAME = "CJK_SEGMENTER";
+    private static final String SEGMENTER_NAME = "CJK_SEGMENTER";
     /**
      * 待处理的分词hit队列
      */
@@ -89,7 +89,8 @@ class CJKSegmenter implements ISegmenter {
                     //前缀匹配则放入hit列表
                     this.tmpHits.add(singleCharHit);
                 }
-            } else if (singleCharHit.isPrefix()) {//首字为词前缀
+            } else if (singleCharHit.isPrefix()) {
+                //首字为词前缀
                 //前缀匹配则放入hit列表
                 this.tmpHits.add(singleCharHit);
             }

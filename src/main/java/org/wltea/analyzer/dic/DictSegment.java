@@ -32,25 +32,38 @@ import java.util.Map;
  */
 class DictSegment implements Comparable<DictSegment> {
 
-    //公用字典表，存储汉字
-    private static final Map<Character, Character> charMap = new HashMap<Character, Character>(16, 0.95f);
-    //数组大小上限
+    /**
+     * 公用字典表，存储汉字
+     */
+    private static final Map<Character, Character> CHAR_MAP = new HashMap<>(16, 0.95f);
+    /**
+     * 数组大小上限
+     */
     private static final int ARRAY_LENGTH_LIMIT = 3;
-    //Map存储结构
+    /**
+     * Map存储结构
+     */
     private Map<Character, DictSegment> childrenMap;
-    //数组方式存储结构
+    /**
+     * 数组方式存储结构
+     */
     private DictSegment[] childrenArray;
-
-    //当前节点上存储的字符
+    /**
+     * 当前节点上存储的字符
+     */
     private Character nodeChar;
-    //当前节点存储的Segment数目
-    //storeSize <=ARRAY_LENGTH_LIMIT ，使用数组存储， storeSize >ARRAY_LENGTH_LIMIT ,则使用Map存储
+    /**
+     * 当前节点存储的Segment数目
+     * storeSize <=ARRAY_LENGTH_LIMIT ，使用数组存储， storeSize >ARRAY_LENGTH_LIMIT ,则使用Map存储
+     */
     private int storeSize = 0;
-    //当前DictSegment状态 ,默认 0 , 1表示从根节点到当前节点的路径表示一个词
+    /**
+     * 当前DictSegment状态 ,默认 0 , 1表示从根节点到当前节点的路径表示一个词
+     */
     private int nodeState = 0;
 
     DictSegment(Character nodeChar) {
-        if (nodeChar == null) {
+        if (null == nodeChar) {
             throw new IllegalArgumentException("参数为空异常，字符不能为空");
         }
         this.nodeChar = nodeChar;
@@ -133,16 +146,14 @@ class DictSegment implements Comparable<DictSegment> {
 
         } else if (segmentMap != null) {
             //在map中查找
-            ds = (DictSegment) segmentMap.get(keyChar);
+            ds = segmentMap.get(keyChar);
         }
-
         //STEP2 找到DictSegment，判断词的匹配状态，是否继续递归，还是返回结果
         if (ds != null) {
             if (length > 1) {
                 //词未匹配完，继续往下搜索
                 return ds.match(charArray, begin + 1, length - 1, searchHit);
             } else if (length == 1) {
-
                 //搜索最后一个char
                 if (ds.nodeState == 1) {
                     //添加HIT状态为完全匹配
@@ -191,10 +202,10 @@ class DictSegment implements Comparable<DictSegment> {
     private synchronized void fillSegment(char[] charArray, int begin, int length, int enabled) {
         //获取字典表中的汉字对象
         Character beginChar = new Character(charArray[begin]);
-        Character keyChar = charMap.get(beginChar);
+        Character keyChar = CHAR_MAP.get(beginChar);
         //字典中没有该字，则将其添加入字典
         if (keyChar == null) {
-            charMap.put(beginChar, beginChar);
+            CHAR_MAP.put(beginChar, beginChar);
             keyChar = beginChar;
         }
 
@@ -215,7 +226,7 @@ class DictSegment implements Comparable<DictSegment> {
     }
 
     /**
-     * 查找本节点下对应的keyChar的segment	 *
+     * 查找本节点下对应的keyChar的segment*
      *
      * @param keyChar
      * @param create  =1如果没有找到，则创建新的segment ; =0如果没有找到，不创建，返回null
@@ -225,7 +236,6 @@ class DictSegment implements Comparable<DictSegment> {
     private DictSegment lookforSegment(Character keyChar, int create) {
 
         DictSegment ds = null;
-
         if (this.storeSize <= ARRAY_LENGTH_LIMIT) {
             //获取数组容器，如果数组未创建则创建数组
             DictSegment[] segmentArray = getChildrenArray();
@@ -245,7 +255,6 @@ class DictSegment implements Comparable<DictSegment> {
                     //segment数目+1
                     this.storeSize++;
                     Arrays.sort(segmentArray, 0, this.storeSize);
-
                 } else {
                     //数组容量已满，切换Map存储
                     //获取Map容器，如果Map未创建,则创建Map
@@ -261,12 +270,11 @@ class DictSegment implements Comparable<DictSegment> {
                 }
 
             }
-
         } else {
             //获取Map容器，如果Map未创建,则创建Map
             Map<Character, DictSegment> segmentMap = getChildrenMap();
             //搜索Map
-            ds = (DictSegment) segmentMap.get(keyChar);
+            ds = segmentMap.get(keyChar);
             if (ds == null && create == 1) {
                 //构造新的segment
                 ds = new DictSegment(keyChar);
@@ -302,7 +310,7 @@ class DictSegment implements Comparable<DictSegment> {
         if (this.childrenMap == null) {
             synchronized(this) {
                 if (this.childrenMap == null) {
-                    this.childrenMap = new HashMap<Character, DictSegment>(ARRAY_LENGTH_LIMIT * 2, 0.8f);
+                    this.childrenMap = new HashMap<>(ARRAY_LENGTH_LIMIT * 2, 0.8f);
                 }
             }
         }

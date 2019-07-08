@@ -50,11 +50,11 @@ public class IKQueryExpressionParser {
 
     //public static final String LUCENE_SPECIAL_CHAR = "&&||-()':={}[],";
 
-    private List<Element> elements = new ArrayList<Element>();
+    private List<Element> elements = new ArrayList<>();
 
-    private Stack<Query> querys = new Stack<Query>();
+    private Stack<Query> querys = new Stack<>();
 
-    private Stack<Element> operates = new Stack<Element>();
+    private Stack<Element> operates = new Stack<>();
 
     /**
      * 解析查询表达式，生成Lucene Query对象
@@ -65,7 +65,7 @@ public class IKQueryExpressionParser {
      * @return Lucene query
      */
     public Query parseExp(String expression, boolean quickMode) {
-        Query lucenceQuery = null;
+        Query luceneQuery = null;
         if (expression != null && !"".equals(expression.trim())) {
             try {
                 //文法解析
@@ -73,7 +73,7 @@ public class IKQueryExpressionParser {
                 //语法解析
                 this.parseSyntax(quickMode);
                 if (this.querys.size() == 1) {
-                    lucenceQuery = this.querys.pop();
+                    luceneQuery = this.querys.pop();
                 } else {
                     throw new IllegalStateException("表达式异常： 缺少逻辑操作符 或 括号缺失");
                 }
@@ -83,7 +83,7 @@ public class IKQueryExpressionParser {
                 operates.clear();
             }
         }
-        return lucenceQuery;
+        return luceneQuery;
     }
 
     /**
@@ -96,264 +96,264 @@ public class IKQueryExpressionParser {
         if (expression == null) {
             return;
         }
-        Element curretElement = null;
+        Element currentElement = null;
 
         char[] expChars = expression.toCharArray();
         for (int i = 0; i < expChars.length; i++) {
             switch (expChars[i]) {
                 case '&':
-                    if (curretElement == null) {
-                        curretElement = new Element();
-                        curretElement.type = '&';
-                        curretElement.append(expChars[i]);
-                    } else if (curretElement.type == '&') {
-                        curretElement.append(expChars[i]);
-                        this.elements.add(curretElement);
-                        curretElement = null;
-                    } else if (curretElement.type == '\'') {
-                        curretElement.append(expChars[i]);
+                    if (currentElement == null) {
+                        currentElement = new Element();
+                        currentElement.type = '&';
+                        currentElement.append(expChars[i]);
+                    } else if (currentElement.type == '&') {
+                        currentElement.append(expChars[i]);
+                        this.elements.add(currentElement);
+                        currentElement = null;
+                    } else if (currentElement.type == '\'') {
+                        currentElement.append(expChars[i]);
                     } else {
-                        this.elements.add(curretElement);
-                        curretElement = new Element();
-                        curretElement.type = '&';
-                        curretElement.append(expChars[i]);
+                        this.elements.add(currentElement);
+                        currentElement = new Element();
+                        currentElement.type = '&';
+                        currentElement.append(expChars[i]);
                     }
                     break;
 
                 case '|':
-                    if (curretElement == null) {
-                        curretElement = new Element();
-                        curretElement.type = '|';
-                        curretElement.append(expChars[i]);
-                    } else if (curretElement.type == '|') {
-                        curretElement.append(expChars[i]);
-                        this.elements.add(curretElement);
-                        curretElement = null;
-                    } else if (curretElement.type == '\'') {
-                        curretElement.append(expChars[i]);
+                    if (currentElement == null) {
+                        currentElement = new Element();
+                        currentElement.type = '|';
+                        currentElement.append(expChars[i]);
+                    } else if (currentElement.type == '|') {
+                        currentElement.append(expChars[i]);
+                        this.elements.add(currentElement);
+                        currentElement = null;
+                    } else if (currentElement.type == '\'') {
+                        currentElement.append(expChars[i]);
                     } else {
-                        this.elements.add(curretElement);
-                        curretElement = new Element();
-                        curretElement.type = '|';
-                        curretElement.append(expChars[i]);
+                        this.elements.add(currentElement);
+                        currentElement = new Element();
+                        currentElement.type = '|';
+                        currentElement.append(expChars[i]);
                     }
                     break;
 
                 case '-':
-                    if (curretElement != null) {
-                        if (curretElement.type == '\'') {
-                            curretElement.append(expChars[i]);
+                    if (currentElement != null) {
+                        if (currentElement.type == '\'') {
+                            currentElement.append(expChars[i]);
                             continue;
                         } else {
-                            this.elements.add(curretElement);
+                            this.elements.add(currentElement);
                         }
                     }
-                    curretElement = new Element();
-                    curretElement.type = '-';
-                    curretElement.append(expChars[i]);
-                    this.elements.add(curretElement);
-                    curretElement = null;
+                    currentElement = new Element();
+                    currentElement.type = '-';
+                    currentElement.append(expChars[i]);
+                    this.elements.add(currentElement);
+                    currentElement = null;
                     break;
 
                 case '(':
-                    if (curretElement != null) {
-                        if (curretElement.type == '\'') {
-                            curretElement.append(expChars[i]);
+                    if (currentElement != null) {
+                        if (currentElement.type == '\'') {
+                            currentElement.append(expChars[i]);
                             continue;
                         } else {
-                            this.elements.add(curretElement);
+                            this.elements.add(currentElement);
                         }
                     }
-                    curretElement = new Element();
-                    curretElement.type = '(';
-                    curretElement.append(expChars[i]);
-                    this.elements.add(curretElement);
-                    curretElement = null;
+                    currentElement = new Element();
+                    currentElement.type = '(';
+                    currentElement.append(expChars[i]);
+                    this.elements.add(currentElement);
+                    currentElement = null;
                     break;
 
                 case ')':
-                    if (curretElement != null) {
-                        if (curretElement.type == '\'') {
-                            curretElement.append(expChars[i]);
+                    if (currentElement != null) {
+                        if (currentElement.type == '\'') {
+                            currentElement.append(expChars[i]);
                             continue;
                         } else {
-                            this.elements.add(curretElement);
+                            this.elements.add(currentElement);
                         }
                     }
-                    curretElement = new Element();
-                    curretElement.type = ')';
-                    curretElement.append(expChars[i]);
-                    this.elements.add(curretElement);
-                    curretElement = null;
+                    currentElement = new Element();
+                    currentElement.type = ')';
+                    currentElement.append(expChars[i]);
+                    this.elements.add(currentElement);
+                    currentElement = null;
                     break;
 
                 case ':':
-                    if (curretElement != null) {
-                        if (curretElement.type == '\'') {
-                            curretElement.append(expChars[i]);
+                    if (currentElement != null) {
+                        if (currentElement.type == '\'') {
+                            currentElement.append(expChars[i]);
                             continue;
                         } else {
-                            this.elements.add(curretElement);
+                            this.elements.add(currentElement);
                         }
                     }
-                    curretElement = new Element();
-                    curretElement.type = ':';
-                    curretElement.append(expChars[i]);
-                    this.elements.add(curretElement);
-                    curretElement = null;
+                    currentElement = new Element();
+                    currentElement.type = ':';
+                    currentElement.append(expChars[i]);
+                    this.elements.add(currentElement);
+                    currentElement = null;
                     break;
 
                 case '=':
-                    if (curretElement != null) {
-                        if (curretElement.type == '\'') {
-                            curretElement.append(expChars[i]);
+                    if (currentElement != null) {
+                        if (currentElement.type == '\'') {
+                            currentElement.append(expChars[i]);
                             continue;
                         } else {
-                            this.elements.add(curretElement);
+                            this.elements.add(currentElement);
                         }
                     }
-                    curretElement = new Element();
-                    curretElement.type = '=';
-                    curretElement.append(expChars[i]);
-                    this.elements.add(curretElement);
-                    curretElement = null;
+                    currentElement = new Element();
+                    currentElement.type = '=';
+                    currentElement.append(expChars[i]);
+                    this.elements.add(currentElement);
+                    currentElement = null;
                     break;
 
                 case ' ':
-                    if (curretElement != null) {
-                        if (curretElement.type == '\'') {
-                            curretElement.append(expChars[i]);
+                    if (currentElement != null) {
+                        if (currentElement.type == '\'') {
+                            currentElement.append(expChars[i]);
                         } else {
-                            this.elements.add(curretElement);
-                            curretElement = null;
+                            this.elements.add(currentElement);
+                            currentElement = null;
                         }
                     }
 
                     break;
 
                 case '\'':
-                    if (curretElement == null) {
-                        curretElement = new Element();
-                        curretElement.type = '\'';
+                    if (currentElement == null) {
+                        currentElement = new Element();
+                        currentElement.type = '\'';
 
-                    } else if (curretElement.type == '\'') {
-                        this.elements.add(curretElement);
-                        curretElement = null;
+                    } else if (currentElement.type == '\'') {
+                        this.elements.add(currentElement);
+                        currentElement = null;
 
                     } else {
-                        this.elements.add(curretElement);
-                        curretElement = new Element();
-                        curretElement.type = '\'';
+                        this.elements.add(currentElement);
+                        currentElement = new Element();
+                        currentElement.type = '\'';
 
                     }
                     break;
 
                 case '[':
-                    if (curretElement != null) {
-                        if (curretElement.type == '\'') {
-                            curretElement.append(expChars[i]);
+                    if (currentElement != null) {
+                        if (currentElement.type == '\'') {
+                            currentElement.append(expChars[i]);
                             continue;
                         } else {
-                            this.elements.add(curretElement);
+                            this.elements.add(currentElement);
                         }
                     }
-                    curretElement = new Element();
-                    curretElement.type = '[';
-                    curretElement.append(expChars[i]);
-                    this.elements.add(curretElement);
-                    curretElement = null;
+                    currentElement = new Element();
+                    currentElement.type = '[';
+                    currentElement.append(expChars[i]);
+                    this.elements.add(currentElement);
+                    currentElement = null;
                     break;
 
                 case ']':
-                    if (curretElement != null) {
-                        if (curretElement.type == '\'') {
-                            curretElement.append(expChars[i]);
+                    if (currentElement != null) {
+                        if (currentElement.type == '\'') {
+                            currentElement.append(expChars[i]);
                             continue;
                         } else {
-                            this.elements.add(curretElement);
+                            this.elements.add(currentElement);
                         }
                     }
-                    curretElement = new Element();
-                    curretElement.type = ']';
-                    curretElement.append(expChars[i]);
-                    this.elements.add(curretElement);
-                    curretElement = null;
+                    currentElement = new Element();
+                    currentElement.type = ']';
+                    currentElement.append(expChars[i]);
+                    this.elements.add(currentElement);
+                    currentElement = null;
 
                     break;
 
                 case '{':
-                    if (curretElement != null) {
-                        if (curretElement.type == '\'') {
-                            curretElement.append(expChars[i]);
+                    if (currentElement != null) {
+                        if (currentElement.type == '\'') {
+                            currentElement.append(expChars[i]);
                             continue;
                         } else {
-                            this.elements.add(curretElement);
+                            this.elements.add(currentElement);
                         }
                     }
-                    curretElement = new Element();
-                    curretElement.type = '{';
-                    curretElement.append(expChars[i]);
-                    this.elements.add(curretElement);
-                    curretElement = null;
+                    currentElement = new Element();
+                    currentElement.type = '{';
+                    currentElement.append(expChars[i]);
+                    this.elements.add(currentElement);
+                    currentElement = null;
                     break;
 
                 case '}':
-                    if (curretElement != null) {
-                        if (curretElement.type == '\'') {
-                            curretElement.append(expChars[i]);
+                    if (currentElement != null) {
+                        if (currentElement.type == '\'') {
+                            currentElement.append(expChars[i]);
                             continue;
                         } else {
-                            this.elements.add(curretElement);
+                            this.elements.add(currentElement);
                         }
                     }
-                    curretElement = new Element();
-                    curretElement.type = '}';
-                    curretElement.append(expChars[i]);
-                    this.elements.add(curretElement);
-                    curretElement = null;
+                    currentElement = new Element();
+                    currentElement.type = '}';
+                    currentElement.append(expChars[i]);
+                    this.elements.add(currentElement);
+                    currentElement = null;
 
                     break;
                 case ',':
-                    if (curretElement != null) {
-                        if (curretElement.type == '\'') {
-                            curretElement.append(expChars[i]);
+                    if (currentElement != null) {
+                        if (currentElement.type == '\'') {
+                            currentElement.append(expChars[i]);
                             continue;
                         } else {
-                            this.elements.add(curretElement);
+                            this.elements.add(currentElement);
                         }
                     }
-                    curretElement = new Element();
-                    curretElement.type = ',';
-                    curretElement.append(expChars[i]);
-                    this.elements.add(curretElement);
-                    curretElement = null;
+                    currentElement = new Element();
+                    currentElement.type = ',';
+                    currentElement.append(expChars[i]);
+                    this.elements.add(currentElement);
+                    currentElement = null;
 
                     break;
 
                 default:
-                    if (curretElement == null) {
-                        curretElement = new Element();
-                        curretElement.type = 'F';
-                        curretElement.append(expChars[i]);
+                    if (currentElement == null) {
+                        currentElement = new Element();
+                        currentElement.type = 'F';
+                        currentElement.append(expChars[i]);
 
-                    } else if (curretElement.type == 'F') {
-                        curretElement.append(expChars[i]);
+                    } else if (currentElement.type == 'F') {
+                        currentElement.append(expChars[i]);
 
-                    } else if (curretElement.type == '\'') {
-                        curretElement.append(expChars[i]);
+                    } else if (currentElement.type == '\'') {
+                        currentElement.append(expChars[i]);
 
                     } else {
-                        this.elements.add(curretElement);
-                        curretElement = new Element();
-                        curretElement.type = 'F';
-                        curretElement.append(expChars[i]);
+                        this.elements.add(currentElement);
+                        currentElement = new Element();
+                        currentElement.type = 'F';
+                        currentElement.append(expChars[i]);
                     }
             }
         }
 
-        if (curretElement != null) {
-            this.elements.add(curretElement);
-            curretElement = null;
+        if (currentElement != null) {
+            this.elements.add(currentElement);
+            currentElement = null;
         }
     }
 
@@ -468,8 +468,7 @@ public class IKQueryExpressionParser {
         }
 
         BooleanQuery.Builder booleanQueryBuilder = new BooleanQuery.Builder();
-        //		resultQuery = booleanQueryBuilder.build();
-
+        //resultQuery = booleanQueryBuilder.build();
         if (this.querys.size() == 1) {
             return this.querys.get(0);
         }

@@ -28,11 +28,17 @@ package org.wltea.analyzer.core;
  */
 class LexemePath extends QuickSortSet implements Comparable<LexemePath> {
 
-    //起始位置
+    /**
+     * 起始位置
+     */
     private int pathBegin;
-    //结束
+    /**
+     * 结束
+     */
     private int pathEnd;
-    //词元链的有效字符长度
+    /**
+     * 词元链的有效字符长度
+     */
     private int payloadLength;
 
     LexemePath() {
@@ -55,7 +61,6 @@ class LexemePath extends QuickSortSet implements Comparable<LexemePath> {
             this.pathEnd = lexeme.getBegin() + lexeme.getLength();
             this.payloadLength += lexeme.getLength();
             return true;
-
         } else if (this.checkCross(lexeme)) {
             this.addLexeme(lexeme);
             if (lexeme.getBegin() + lexeme.getLength() > this.pathEnd) {

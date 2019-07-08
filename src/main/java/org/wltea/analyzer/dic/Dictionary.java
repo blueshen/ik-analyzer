@@ -41,24 +41,24 @@ public class Dictionary {
 
     private static final Logger LOG = LoggerFactory.getLogger(Dictionary.class);
 
-    /*
+    /**
      * 词典单子实例
      */
     private static Dictionary singleton;
 
-    /*
+    /**
      * 主词典对象
      */
-    private DictSegment _MainDict;
+    private DictSegment mainDict;
 
-    /*
+    /**
      * 停止词词典
      */
-    private DictSegment _StopWordDict;
-    /*
+    private DictSegment stopWordDict;
+    /**
      * 量词词典
      */
-    private DictSegment _QuantifierDict;
+    private DictSegment quantifierDict;
 
     /**
      * 配置对象
@@ -115,7 +115,7 @@ public class Dictionary {
             for (String word : words) {
                 if (word != null) {
                     //批量加载词条到主内存词典中
-                    singleton._MainDict.fillSegment(word.trim().toLowerCase().toCharArray());
+                    singleton.mainDict.fillSegment(word.trim().toLowerCase().toCharArray());
                 }
             }
         }
@@ -131,7 +131,7 @@ public class Dictionary {
             for (String word : words) {
                 if (word != null) {
                     //批量屏蔽词条
-                    singleton._MainDict.disableSegment(word.trim().toLowerCase().toCharArray());
+                    singleton.mainDict.disableSegment(word.trim().toLowerCase().toCharArray());
                 }
             }
         }
@@ -145,7 +145,7 @@ public class Dictionary {
      * @return Hit 匹配结果描述
      */
     public Hit matchInMainDict(char[] charArray) {
-        return singleton._MainDict.match(charArray);
+        return singleton.mainDict.match(charArray);
     }
 
     /**
@@ -158,7 +158,7 @@ public class Dictionary {
      * @return Hit 匹配结果描述
      */
     public Hit matchInMainDict(char[] charArray, int begin, int length) {
-        return singleton._MainDict.match(charArray, begin, length);
+        return singleton.mainDict.match(charArray, begin, length);
     }
 
     /**
@@ -171,7 +171,7 @@ public class Dictionary {
      * @return Hit 匹配结果描述
      */
     public Hit matchInQuantifierDict(char[] charArray, int begin, int length) {
-        return singleton._QuantifierDict.match(charArray, begin, length);
+        return singleton.quantifierDict.match(charArray, begin, length);
     }
 
     /**
@@ -198,7 +198,7 @@ public class Dictionary {
      * @return boolean
      */
     public boolean isStopWord(char[] charArray, int begin, int length) {
-        return singleton._StopWordDict.match(charArray, begin, length).isMatch();
+        return singleton.stopWordDict.match(charArray, begin, length).isMatch();
     }
 
     /**
@@ -206,7 +206,7 @@ public class Dictionary {
      */
     private void loadMainDict() {
         //建立一个主词典实例
-        _MainDict = new DictSegment((char) 0);
+        mainDict = new DictSegment((char) 0);
         //读取主词典文件
         InputStream is = this.getClass().getClassLoader().getResourceAsStream(cfg.getMainDictionary());
         if (is == null) {
@@ -219,7 +219,7 @@ public class Dictionary {
             do {
                 theWord = br.readLine();
                 if (theWord != null && !"".equals(theWord.trim())) {
-                    _MainDict.fillSegment(theWord.trim().toLowerCase().toCharArray());
+                    mainDict.fillSegment(theWord.trim().toLowerCase().toCharArray());
                 }
             } while (theWord != null);
 
@@ -245,7 +245,7 @@ public class Dictionary {
         //加载扩展词典配置
         List<String> extDictFiles = cfg.getExtDictionarys();
         if (extDictFiles != null) {
-            InputStream is = null;
+            InputStream is;
             for (String extDictName : extDictFiles) {
                 //读取扩展词典文件
                 LOG.info("加载扩展词典:{}", extDictName);
@@ -261,7 +261,7 @@ public class Dictionary {
                         theWord = br.readLine();
                         if (theWord != null && !"".equals(theWord.trim())) {
                             //加载扩展词典数据到主内存词典中
-                            _MainDict.fillSegment(theWord.trim().toLowerCase().toCharArray());
+                            mainDict.fillSegment(theWord.trim().toLowerCase().toCharArray());
                         }
                     } while (theWord != null);
 
@@ -285,7 +285,7 @@ public class Dictionary {
      */
     private void loadStopWordDict() {
         //建立一个主词典实例
-        _StopWordDict = new DictSegment((char) 0);
+        stopWordDict = new DictSegment((char) 0);
         //加载扩展停止词典
         List<String> extStopWordDictFiles = cfg.getExtStopWordDictionarys();
         if (extStopWordDictFiles != null) {
@@ -305,7 +305,7 @@ public class Dictionary {
                         theWord = br.readLine();
                         if (theWord != null && !"".equals(theWord.trim())) {
                             //加载扩展停止词典数据到内存中
-                            _StopWordDict.fillSegment(theWord.trim().toLowerCase().toCharArray());
+                            stopWordDict.fillSegment(theWord.trim().toLowerCase().toCharArray());
                         }
                     } while (theWord != null);
 
@@ -329,7 +329,7 @@ public class Dictionary {
      */
     private void loadQuantifierDict() {
         //建立一个量词典实例
-        _QuantifierDict = new DictSegment((char) 0);
+        quantifierDict = new DictSegment((char) 0);
         //读取量词词典文件
         InputStream is = this.getClass().getClassLoader().getResourceAsStream(cfg.getQuantifierDicionary());
         if (is == null) {
@@ -337,11 +337,11 @@ public class Dictionary {
         }
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"), 512);
-            String theWord = null;
+            String theWord;
             do {
                 theWord = br.readLine();
                 if (theWord != null && !"".equals(theWord.trim())) {
-                    _QuantifierDict.fillSegment(theWord.trim().toLowerCase().toCharArray());
+                    quantifierDict.fillSegment(theWord.trim().toLowerCase().toCharArray());
                 }
             } while (theWord != null);
 

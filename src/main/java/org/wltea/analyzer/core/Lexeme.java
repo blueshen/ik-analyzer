@@ -48,7 +48,6 @@ public class Lexeme implements Comparable<Lexeme> {
     public static final int TYPE_COUNT = 32;
     //中文数量词
     public static final int TYPE_CQUAN = 48;
-
     //词元的起始位移
     private int offset;
     //词元的相对起始位置

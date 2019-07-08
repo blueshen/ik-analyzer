@@ -100,7 +100,7 @@ public final class IKSegmenter {
         //处理字母的子分词器
         segmenters.add(new LetterSegmenter());
         //处理中文数量词的子分词器
-        segmenters.add(new CN_QuantifierSegmenter());
+        segmenters.add(new CnQuantifierSegmenter());
         //处理中文词的子分词器
         segmenters.add(new CJKSegmenter());
         return segmenters;

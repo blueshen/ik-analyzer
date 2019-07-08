@@ -27,23 +27,32 @@ package org.wltea.analyzer.dic;
  * 表示一次词典匹配的命中
  */
 public class Hit {
-    //Hit不匹配
+    /**
+     * Hit不匹配
+     */
     private static final int UNMATCH = 0x00000000;
-    //Hit完全匹配
+    /**
+     * Hit完全匹配
+     */
     private static final int MATCH = 0x00000001;
-    //Hit前缀匹配
+    /**
+     * Hit前缀匹配
+     */
     private static final int PREFIX = 0x00000010;
-
-    //该HIT当前状态，默认未匹配
+    /**
+     * 该HIT当前状态，默认未匹配
+     */
     private int hitState = UNMATCH;
 
-    //记录词典匹配过程中，当前匹配到的词典分支节点
+    /**
+     * 记录词典匹配过程中，当前匹配到的词典分支节点
+     */
     private DictSegment matchedDictSegment;
-    /*
+    /**
      * 词段开始位置
      */
     private int begin;
-    /*
+    /**
      * 词段的结束位置
      */
     private int end;
@@ -55,9 +64,6 @@ public class Hit {
         return (this.hitState & MATCH) > 0;
     }
 
-    /**
-     *
-     */
     public void setMatch() {
         this.hitState = this.hitState | MATCH;
     }
@@ -69,9 +75,6 @@ public class Hit {
         return (this.hitState & PREFIX) > 0;
     }
 
-    /**
-     *
-     */
     public void setPrefix() {
         this.hitState = this.hitState | PREFIX;
     }
@@ -83,9 +86,6 @@ public class Hit {
         return this.hitState == UNMATCH;
     }
 
-    /**
-     *
-     */
     public void setUnmatch() {
         this.hitState = UNMATCH;
     }

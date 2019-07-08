@@ -31,7 +31,7 @@ import java.util.Arrays;
 class LetterSegmenter implements ISegmenter {
 
     //子分词器标签
-    static final String SEGMENTER_NAME = "LETTER_SEGMENTER";
+    private static final String SEGMENTER_NAME = "LETTER_SEGMENTER";
     //链接符号
     private static final char[] LETTER_CONNECTOR = new char[] {'#', '&', '+', '-', '.', '@', '_'};
 

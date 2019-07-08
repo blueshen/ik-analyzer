@@ -39,36 +39,59 @@ import org.wltea.analyzer.dic.Dictionary;
  */
 class AnalyzeContext {
 
-    //默认缓冲区大小
+    /**
+     * 默认缓冲区大小
+     */
     private static final int BUFF_SIZE = 4096;
-    //缓冲区耗尽的临界值
+    /**
+     * 缓冲区耗尽的临界值
+     */
     private static final int BUFF_EXHAUST_CRITICAL = 100;
 
-    //字符窜读取缓冲
+    /**
+     * 字符窜读取缓冲
+     */
     private char[] segmentBuff;
-    //字符类型数组
+    /**
+     * 字符类型数组
+     */
     private int[] charTypes;
 
-    //记录Reader内已分析的字串总长度
-    //在分多段分析词元时，该变量累计当前的segmentBuff相对于reader起始位置的位移
+    /**
+     * 记录Reader内已分析的字串总长度
+     * 在分多段分析词元时，该变量累计当前的segmentBuff相对于reader起始位置的位移
+     */
     private int buffOffset;
-    //当前缓冲区位置指针
+    /**
+     * 当前缓冲区位置指针
+     */
     private int cursor;
-    //最近一次读入的,可处理的字串长度
+    /**
+     * 最近一次读入的,可处理的字串长度
+     */
     private int available;
 
-    //子分词器锁
-    //该集合非空，说明有子分词器在占用segmentBuff
+    /**
+     * 子分词器锁
+     * 该集合非空，说明有子分词器在占用segmentBuff
+     */
     private Set<String> buffLocker;
 
-    //原始分词结果集合，未经歧义处理
+    /**
+     * 原始分词结果集合，未经歧义处理
+     */
     private QuickSortSet orgLexemes;
-    //LexemePath位置索引表
+    /**
+     * LexemePath位置索引表
+     */
     private Map<Integer, LexemePath> pathMap;
-    //最终分词结果集
+    /**
+     * 最终分词结果集
+     */
     private LinkedList<Lexeme> results;
-
-    //分词器配置项
+    /**
+     * 分词器配置项
+     */
     private Configuration cfg;
 
     public AnalyzeContext(Configuration cfg) {
