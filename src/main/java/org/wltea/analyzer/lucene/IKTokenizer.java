@@ -88,10 +88,6 @@ public final class IKTokenizer extends Tokenizer {
         return false;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.apache.lucene.analysis.Tokenizer#reset(java.io.Reader)
-     */
     @Override
     public void reset() throws IOException {
         super.reset();

@@ -50,11 +50,9 @@ class CharacterUtil {
     static int identifyCharType(char input) {
         if (input >= '0' && input <= '9') {
             return CHAR_ARABIC;
-
         } else if ((input >= 'a' && input <= 'z')
                 || (input >= 'A' && input <= 'Z')) {
             return CHAR_ENGLISH;
-
         } else {
             Character.UnicodeBlock ub = Character.UnicodeBlock.of(input);
 

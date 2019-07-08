@@ -33,10 +33,10 @@ class LetterSegmenter implements ISegmenter {
     //子分词器标签
     static final String SEGMENTER_NAME = "LETTER_SEGMENTER";
     //链接符号
-    private static final char[] Letter_Connector = new char[] {'#', '&', '+', '-', '.', '@', '_'};
+    private static final char[] LETTER_CONNECTOR = new char[] {'#', '&', '+', '-', '.', '@', '_'};
 
     //数字符号
-    private static final char[] Num_Connector = new char[] {',', '.'};
+    private static final char[] NUM_CONNECTOR = new char[] {',', '.'};
 
     /**
      * 词元的开始位置，
@@ -71,8 +71,8 @@ class LetterSegmenter implements ISegmenter {
     private int arabicEnd;
 
     LetterSegmenter() {
-        Arrays.sort(Letter_Connector);
-        Arrays.sort(Num_Connector);
+        Arrays.sort(LETTER_CONNECTOR);
+        Arrays.sort(NUM_CONNECTOR);
         this.start = -1;
         this.end = -1;
         this.englishStart = -1;
@@ -288,7 +288,7 @@ class LetterSegmenter implements ISegmenter {
      * @return
      */
     private boolean isLetterConnector(char input) {
-        int index = Arrays.binarySearch(Letter_Connector, input);
+        int index = Arrays.binarySearch(LETTER_CONNECTOR, input);
         return index >= 0;
     }
 
@@ -300,7 +300,7 @@ class LetterSegmenter implements ISegmenter {
      * @return
      */
     private boolean isNumConnector(char input) {
-        int index = Arrays.binarySearch(Num_Connector, input);
+        int index = Arrays.binarySearch(NUM_CONNECTOR, input);
         return index >= 0;
     }
 }

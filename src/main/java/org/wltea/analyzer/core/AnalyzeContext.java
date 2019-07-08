@@ -84,10 +84,6 @@ class AnalyzeContext {
     int getCursor() {
         return this.cursor;
     }
-    //
-    //    void setCursor(int cursor){
-    //    	this.cursor = cursor;
-    //    }
 
     char[] getSegmentBuff() {
         return this.segmentBuff;

@@ -32,6 +32,8 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.wltea.analyzer.core.IKSegmenter;
 import org.wltea.analyzer.core.Lexeme;
 
@@ -42,6 +44,8 @@ import org.wltea.analyzer.core.Lexeme;
  * @author linliangyi
  */
 public class SWMCQueryBuilder {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SWMCQueryBuilder.class);
 
     /**
      * 生成SWMCQuery
@@ -137,7 +141,7 @@ public class SWMCQueryBuilder {
                 Query q = qp.parse(keywordBuffer_Short.toString());
                 return q;
             } catch (ParseException e) {
-                e.printStackTrace();
+                LOG.error("parse error", e);
             }
 
         } else {
@@ -146,7 +150,7 @@ public class SWMCQueryBuilder {
                     Query q = qp.parse(keywordBuffer.toString());
                     return q;
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    LOG.error("parse error", e);
                 }
             }
         }

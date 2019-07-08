@@ -30,12 +30,16 @@ import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.wltea.analyzer.cfg.Configuration;
 
 /**
  * 词典管理类,单子模式
  */
 public class Dictionary {
+
+    private static final Logger LOG = LoggerFactory.getLogger(Dictionary.class);
 
     /*
      * 词典单子实例
@@ -220,17 +224,14 @@ public class Dictionary {
             } while (theWord != null);
 
         } catch (IOException ioe) {
-            System.err.println("Main Dictionary loading exception.");
-            ioe.printStackTrace();
-
+            LOG.error("Main Dictionary loading exception.", ioe);
         } finally {
             try {
                 if (is != null) {
                     is.close();
-                    is = null;
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error("io error.", e);
             }
         }
         //加载扩展词典
@@ -260,23 +261,19 @@ public class Dictionary {
                         theWord = br.readLine();
                         if (theWord != null && !"".equals(theWord.trim())) {
                             //加载扩展词典数据到主内存词典中
-                            //System.out.println(theWord);
                             _MainDict.fillSegment(theWord.trim().toLowerCase().toCharArray());
                         }
                     } while (theWord != null);
 
                 } catch (IOException ioe) {
-                    System.err.println("Extension Dictionary loading exception.");
-                    ioe.printStackTrace();
-
+                    LOG.error("Extension Dictionary loading exception.", ioe);
                 } finally {
                     try {
                         if (is != null) {
                             is.close();
-                            is = null;
                         }
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        LOG.error("io error.", e);
                     }
                 }
             }
@@ -294,7 +291,7 @@ public class Dictionary {
         if (extStopWordDictFiles != null) {
             InputStream is = null;
             for (String extStopWordDictName : extStopWordDictFiles) {
-                System.out.println("加载扩展停止词典：" + extStopWordDictName);
+                LOG.info("加载扩展停止词典:{}", extStopWordDictName);
                 //读取扩展词典文件
                 is = this.getClass().getClassLoader().getResourceAsStream(extStopWordDictName);
                 //如果找不到扩展的字典，则忽略
@@ -307,24 +304,20 @@ public class Dictionary {
                     do {
                         theWord = br.readLine();
                         if (theWord != null && !"".equals(theWord.trim())) {
-                            //System.out.println(theWord);
                             //加载扩展停止词典数据到内存中
                             _StopWordDict.fillSegment(theWord.trim().toLowerCase().toCharArray());
                         }
                     } while (theWord != null);
 
                 } catch (IOException ioe) {
-                    System.err.println("Extension Stop word Dictionary loading exception.");
-                    ioe.printStackTrace();
-
+                    LOG.error("Extension Stop word Dictionary loading exception.", ioe);
                 } finally {
                     try {
                         if (is != null) {
                             is.close();
-                            is = null;
                         }
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        LOG.error("io error.", e);
                     }
                 }
             }
@@ -353,17 +346,15 @@ public class Dictionary {
             } while (theWord != null);
 
         } catch (IOException ioe) {
-            System.err.println("Quantifier Dictionary loading exception.");
-            ioe.printStackTrace();
+            LOG.error("Quantifier Dictionary loading exception.", ioe);
 
         } finally {
             try {
                 if (is != null) {
                     is.close();
-                    is = null;
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error("io error.", e);
             }
         }
     }

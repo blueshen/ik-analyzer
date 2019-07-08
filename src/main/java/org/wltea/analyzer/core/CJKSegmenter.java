@@ -63,7 +63,8 @@ class CJKSegmenter implements ISegmenter {
                                 context.getCursor() - hit.getBegin() + 1, Lexeme.TYPE_CNWORD);
                         context.addLexeme(newLexeme);
 
-                        if (!hit.isPrefix()) {//不是词前缀，hit不需要继续匹配，移除
+                        if (!hit.isPrefix()) {
+                            //不是词前缀，hit不需要继续匹配，移除
                             this.tmpHits.remove(hit);
                         }
 

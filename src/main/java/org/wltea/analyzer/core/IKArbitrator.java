@@ -32,7 +32,6 @@ import java.util.TreeSet;
 class IKArbitrator {
 
     IKArbitrator() {
-
     }
 
     /**

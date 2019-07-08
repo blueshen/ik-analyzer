@@ -36,7 +36,6 @@ class DictSegment implements Comparable<DictSegment> {
     private static final Map<Character, Character> charMap = new HashMap<Character, Character>(16, 0.95f);
     //数组大小上限
     private static final int ARRAY_LENGTH_LIMIT = 3;
-
     //Map存储结构
     private Map<Character, DictSegment> childrenMap;
     //数组方式存储结构
