@@ -248,7 +248,7 @@ public class Dictionary {
             InputStream is = null;
             for (String extDictName : extDictFiles) {
                 //读取扩展词典文件
-                System.out.println("加载扩展词典：" + extDictName);
+                LOG.info("加载扩展词典:{}", extDictName);
                 is = this.getClass().getClassLoader().getResourceAsStream(extDictName);
                 //如果找不到扩展的字典，则忽略
                 if (is == null) {
