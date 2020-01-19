@@ -18,7 +18,7 @@ Maven用法：
     <dependency>
         <groupId>org.wltea.ik-analyzer</groupId>
         <artifactId>ik-analyzer</artifactId>
-        <version>8.1.0</version>
+        <version>8.4.0</version>
     </dependency>
 ```
 在IK Analyzer加入Maven Central Repository之前，你需要手动安装，安装到本地的repository，或者上传到自己的Maven repository服务器上。
