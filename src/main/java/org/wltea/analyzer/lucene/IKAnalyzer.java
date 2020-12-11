@@ -25,6 +25,7 @@ package org.wltea.analyzer.lucene;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.Tokenizer;
+import org.wltea.analyzer.cfg.Configuration;
 
 /**
  * IK分词器，Lucene Analyzer接口实现
@@ -33,6 +34,8 @@ import org.apache.lucene.analysis.Tokenizer;
 public final class IKAnalyzer extends Analyzer {
 
     private boolean useSmart;
+
+    private Configuration cfg;
 
     /**
      * IK分词器Lucene  Analyzer接口实现类
@@ -53,6 +56,11 @@ public final class IKAnalyzer extends Analyzer {
         this.useSmart = useSmart;
     }
 
+    public IKAnalyzer(Configuration cfg) {
+        super();
+        this.cfg = cfg;
+    }
+
     public boolean useSmart() {
         return useSmart;
     }
@@ -66,7 +74,7 @@ public final class IKAnalyzer extends Analyzer {
      */
     @Override
     protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer iktokenizer = new IKTokenizer(this.useSmart());
+        Tokenizer iktokenizer = this.cfg != null ? new IKTokenizer(this.cfg) : new IKTokenizer(this.useSmart());
         return new TokenStreamComponents(iktokenizer);
     }
 

@@ -29,6 +29,7 @@ import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
+import org.wltea.analyzer.cfg.Configuration;
 import org.wltea.analyzer.core.IKSegmenter;
 import org.wltea.analyzer.core.Lexeme;
 
@@ -69,6 +70,13 @@ public final class IKTokenizer extends Tokenizer {
         termAtt = addAttribute(CharTermAttribute.class);
         typeAtt = addAttribute(TypeAttribute.class);
         ikimplement = new IKSegmenter(input, useSmart);
+    }
+
+    public IKTokenizer(Configuration cfg){
+        offsetAtt = addAttribute(OffsetAttribute.class);
+        termAtt = addAttribute(CharTermAttribute.class);
+        typeAtt = addAttribute(TypeAttribute.class);
+        ikimplement = new IKSegmenter(input, cfg);
     }
 
     @Override
