@@ -23,15 +23,15 @@
  */
 package org.wltea.analyzer.cfg;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Properties;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Configuration 默认实现
@@ -46,6 +46,7 @@ public class DefaultConfig implements Configuration {
      */
     private static final String PATH_DIC_MAIN = "org/wltea/analyzer/dic/main2012.dic";
     private static final String PATH_DIC_QUANTIFIER = "org/wltea/analyzer/dic/quantifier.dic";
+    private static final String PATH_DIC_STOPWORD = "org/wltea/analyzer/dic/stopword.dic";
 
     /**
      * 分词器配置文件路径
@@ -65,7 +66,7 @@ public class DefaultConfig implements Configuration {
     /**
      * 初始化配置文件
      */
-    private DefaultConfig() {
+    public DefaultConfig() {
         props = new Properties();
         InputStream input = this.getClass().getClassLoader().getResourceAsStream(FILE_NAME);
         if (input != null) {
@@ -161,6 +162,8 @@ public class DefaultConfig implements Configuration {
     @Override
     public List<String> getExtStopWordDictionarys() {
         List<String> extStopWordDictFiles = new ArrayList<String>(2);
+        // 增加默认的停止词
+        extStopWordDictFiles.add(PATH_DIC_STOPWORD);
         String extStopWordDictCfg = props.getProperty(EXT_STOP);
         if (extStopWordDictCfg != null) {
             //使用;分割多个扩展字典配置
