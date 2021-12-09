@@ -23,8 +23,6 @@
  */
 package org.wltea.analyzer.sample;
 
-import java.io.IOException;
-
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -42,11 +40,13 @@ import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.store.ByteBuffersDirectory;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.LockObtainFailedException;
-import org.apache.lucene.store.RAMDirectory;
 import org.junit.Test;
 import org.wltea.analyzer.lucene.IKAnalyzer;
+
+import java.io.IOException;
 
 /**
  * 使用IKAnalyzer进行Lucene索引和查询的演示
@@ -61,7 +61,7 @@ public class LuceneIndexAndSearchTest {
      * 创建一个单条记录的索引，并对其进行搜索
      */
     @Test
-    public void searchTest() {
+    public void searchTest() throws IOException {
         //Lucene Document的域名
         String fieldName = "text";
         //检索内容
@@ -76,7 +76,7 @@ public class LuceneIndexAndSearchTest {
         IndexSearcher isearcher = null;
         try {
             //建立内存索引对象
-            directory = new RAMDirectory();
+            directory = new ByteBuffersDirectory();
 
             //配置IndexWriterConfig
             IndexWriterConfig iwConfig = new IndexWriterConfig(analyzer);

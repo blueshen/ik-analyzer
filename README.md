@@ -8,7 +8,7 @@ IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为<
 
 - Maven化, 代码格式化
 - 添加了不少停用词，使其适用于中文分词
-- 全面支持的lucene全系列版本为5/6/7/8, 持续技术支持 
+- 全面支持的lucene全系列版本为5/6/7/8/9, 持续技术支持 
 
 Maven用法：
 
@@ -18,7 +18,7 @@ Maven用法：
     <dependency>
         <groupId>org.wltea.ik-analyzer</groupId>
         <artifactId>ik-analyzer</artifactId>
-        <version>8.4.0</version>
+        <version>9.0.0</version>
     </dependency>
 ```
 在IK Analyzer加入Maven Central Repository之前，你需要手动安装，安装到本地的repository，或者上传到自己的Maven repository服务器上。

@@ -3,15 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wltea.ik-analyzer</groupId>
     <artifactId>ik-analyzer</artifactId>
-    <version>8.4.0</version>
+    <version>9.0.0</version>
     <name>IK Analyzer</name>
     <description>A dictionary and grammar-based Chinese segmenter.</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <lucene.version>8.4.0</lucene.version>
+        <lucene.version>9.0.0</lucene.version>
         <jdk.version>1.8</jdk.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.lucene</groupId>
@@ -25,14 +24,14 @@
         </dependency>
         <dependency>
             <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-analyzers-common</artifactId>
+            <artifactId>lucene-analysis-common</artifactId>
             <version>${lucene.version}</version>
         </dependency>
 
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
+            <version>1.2.7</version>
         </dependency>
 
         <dependency>
@@ -48,12 +47,10 @@
             <resource>
                 <!-- 设定主资源目录  -->
                 <directory>src/main/java</directory>
-
                 <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，只处理如下配置中包含的资源类型 -->
                 <includes>
                     <include>**/*.dic</include>
                 </includes>
-
                 <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，不处理如下配置中包含的资源类型（剔除下如下配置中包含的资源类型）-->
                 <excludes>
                     <exclude>**/*.yaml</exclude>
@@ -61,7 +58,6 @@
 
                 <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，指定处理后的资源文件输出目录，默认是${build.outputDirectory}指定的目录-->
                 <!--<targetPath>${build.outputDirectory}</targetPath> -->
-
                 <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，是否对主资源目录开启资源过滤 -->
                 <filtering>true</filtering>
             </resource>
@@ -76,6 +72,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
