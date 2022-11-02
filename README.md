@@ -1,9 +1,5 @@
 [![Build Status](https://travis-ci.org/blueshen/ik-analyzer.svg)](https://travis-ci.org/blueshen/ik-analyzer)
 
-Long Term Support，welcome pull request
-
-IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为<http://code.google.com/p/ik-analyzer/>
-
 本版本，主要特点：
 
 - Maven化, 代码格式化
@@ -16,7 +12,7 @@ Maven用法：
 
 ```xml
     <dependency>
-        <groupId>org.wltea.ik-analyzer</groupId>
+        <groupId>cn.shenyanchao.ik-analyzer</groupId>
         <artifactId>ik-analyzer</artifactId>
         <version>9.0.0</version>
     </dependency>
@@ -28,8 +24,12 @@ Maven用法：
 ```shell
     mvn clean install -Dmaven.test.skip=true
 ```
-
 ---
 关于我
 
 请访问 <https://www.shenyanchao.cn>
+
+---
+说明
+
+IKAnalyzer的作者为林良益（linliangyi2007@gmail.com），项目网站为<http://code.google.com/p/ik-analyzer/>
