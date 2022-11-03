@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.shenyanchao.ik-analyzer</groupId>
     <artifactId>ik-analyzer</artifactId>
-    <version>9.0.0-SNAPSHOT</version>
+    <version>9.0.0</version>
     <name>IK Analyzer</name>
     <description>A dictionary and grammar-based Chinese segmenter.</description>
     <issueManagement>
@@ -40,7 +40,7 @@
         <connection>scm:git:https://github.com/blueshen/ik-analyzer.git</connection>
         <developerConnection>scm:git:https://github.com/blueshen/ik-analyzer.git</developerConnection>
         <url>https://github.com/blueshen/ik-analyzer</url>
-    <tag>HEAD</tag>
+    <tag>ik-analyzer-9.0.0</tag>
   </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
