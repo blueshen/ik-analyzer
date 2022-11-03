@@ -40,16 +40,12 @@ import org.apache.lucene.util.BytesRef;
 /**
  * IK简易查询表达式解析
  * 结合SWMCQuery算法
- * <p>
- * 表达式例子 ：
- * (id='1231231' && title:'monkey') || (content:'你好吗'  || ulr='www.ik.com') - name:'helloword'
  *
  * @author linliangyi
  */
 public class IKQueryExpressionParser {
 
     //public static final String LUCENE_SPECIAL_CHAR = "&&||-()':={}[],";
-
     private List<Element> elements = new ArrayList<>();
 
     private Stack<Query> querys = new Stack<>();
