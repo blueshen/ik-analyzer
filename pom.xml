@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.shenyanchao.ik-analyzer</groupId>
     <artifactId>ik-analyzer</artifactId>
-    <version>9.0.1-SNAPSHOT</version>
+    <version>9.0.0-SNAPSHOT</version>
     <name>IK Analyzer</name>
     <description>A dictionary and grammar-based Chinese segmenter.</description>
     <issueManagement>
@@ -157,6 +157,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
+                    <detectJavaApiLink>false</detectJavaApiLink>
                     <additionalJOptions>
                         <additionalJOption>-Xdoclint:none</additionalJOption>
                     </additionalJOptions>
