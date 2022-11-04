@@ -1,8 +1,8 @@
 <!-- Badges section here. -->
 [![GitHub version](https://img.shields.io/maven-central/v/cn.shenyanchao.ik-analyzer/ik-analyzer.svg?style=flat-square)](https://search.maven.org/search?q=g:cn.shenyanchao.ik-analyzer%20AND%20a:ik-analyzer&core=gav)
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/blueshen/ik-analyzer/releases)
-[![Crates.io](https://img.shields.io/badge/license-lgpl__2__1-blue)](./LICENSE)
+[![License](https://img.shields.io/badge/license-LGPL--2.1-blue)](./LICENSE)
 [![Build Status](https://app.travis-ci.com/blueshen/ik-analyzer.svg?branch=master)](https://app.travis-ci.com/github/blueshen/ik-analyzer)
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/blueshen/ik-analyzer/releases)
 
 [![GitHub forks](https://img.shields.io/github/forks/blueshen/ik-analyzer.svg?style=social&label=Fork)](https://github.com/blueshen/ik-analyzer/network/members)
 [![GitHub stars](https://img.shields.io/github/stars/blueshen/ik-analyzer.svg?style=social&label=Star)](https://github.com/blueshen/ik-analyze/stargazers)
