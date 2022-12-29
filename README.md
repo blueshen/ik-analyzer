@@ -39,9 +39,13 @@ Maven用法：
     <dependency>
         <groupId>org.wltea.ik-analyzer</groupId>
         <artifactId>ik-analyzer</artifactId>
-        <version>8.4.0</version>
+        <version>9.0.0</version>
     </dependency>
 ```
+
+Rust版本:
+
+如果你有使用Rust的需求，请使用 https://github.com/blueshen/ik-rs
 ---
 关于我
 
